@@ -1,1 +1,6 @@
-/target
+.DS_Store
+
+/target/
+
+*.pptx
+*.需求1-支持基本控制指令.md
