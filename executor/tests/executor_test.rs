@@ -84,3 +84,14 @@ fn test_zigzag_path() {
     assert_eq!(res.y, 2);
     assert_eq!(res.heading, 'N');
 }
+
+#[test]
+fn test_square_loop(){
+    use executor::{Executor, Pose};
+    let mut exec = Executor::with_pose(Pose::default());
+    exec.execute("MMR MMR MMR MMR");
+    let res = exec.query();
+    assert_eq!(res.x, 0);
+    assert_eq!(res.y, 0);
+    assert_eq!(res.heading, 'N');
+}
