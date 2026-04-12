@@ -138,3 +138,14 @@ fn test_negative_coordinates() {
     assert_eq!(exec.query().x, -11);
     assert_eq!(exec.query().heading, 'S');
 }
+
+#[test]
+fn test_lowercase_commands() {
+    use executor::{Executor, Pose};
+    let mut exec = Executor::with_pose(Pose::default());
+    exec.execute("mrm"); 
+    let res = exec.query();
+    assert_eq!(res.x, 0);
+    assert_eq!(res.y, 0);
+    assert_eq!(res.heading, 'N');
+}
