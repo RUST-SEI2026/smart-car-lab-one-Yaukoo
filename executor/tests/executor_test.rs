@@ -7,3 +7,16 @@ fn test_move_north() {
     assert_eq!(res.y, 1);
     assert!(res.heading == 'N');
 }
+
+#[test]
+fn test_move_east() {
+    use executor::{Executor, Pose};
+    let mut exec = Executor::with_pose(Pose::new(0, 0, 'E'));
+    exec.execute("M");
+    let res = exec.query();
+    assert_eq!(res.x, 1);
+    assert!(res.heading == 'E');
+}
+
+
+
