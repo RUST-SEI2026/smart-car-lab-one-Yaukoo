@@ -1,6 +1,7 @@
+use executor::{Executor, Pose};
+
 #[test]
 fn test_move_north() {
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::default());
     exec.execute("M");
     let res = exec.query();
@@ -10,7 +11,6 @@ fn test_move_north() {
 
 #[test]
 fn test_move_east() {
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::new(0, 0, 'E'));
     exec.execute("M");
     let res = exec.query();
@@ -20,7 +20,6 @@ fn test_move_east() {
 
 #[test]
 fn test_move_south() {
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::new(0, 0, 'S'));
     exec.execute("M");
     let res = exec.query();
@@ -30,7 +29,6 @@ fn test_move_south() {
 
 #[test]
 fn test_move_west() {
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::new(0, 0, 'W'));
     exec.execute("M");
     let res = exec.query();
@@ -40,7 +38,6 @@ fn test_move_west() {
 
 #[test]
 fn test_turn_right() {
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::default());
     exec.execute("R");
     let res = exec.query();
@@ -58,7 +55,6 @@ fn test_turn_right() {
 
 #[test]
 fn test_turn_left() {
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::default());
     exec.execute("L");
     let res = exec.query();
@@ -76,7 +72,6 @@ fn test_turn_left() {
 
 #[test]
 fn test_zigzag_path() {
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::default());
     exec.execute("MRMLM");
     let res = exec.query();
@@ -87,7 +82,6 @@ fn test_zigzag_path() {
 
 #[test]
 fn test_square_loop(){
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::default());
     exec.execute("MMR MMR MMR MMR");
     let res = exec.query();
@@ -98,7 +92,6 @@ fn test_square_loop(){
 
 #[test]
 fn test_complex_path(){
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::default());
     exec.execute("MMRMLMRRMLMMMRMLM");
     let res = exec.query();
@@ -109,7 +102,6 @@ fn test_complex_path(){
 
 #[test]
 fn test_invalid_commands(){
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::default());
     exec.execute("M 1M MX@");
     let res = exec.query();
@@ -120,7 +112,6 @@ fn test_invalid_commands(){
 
 #[test]
 fn test_empty_command(){
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::default());
     exec.execute("");
     let res = exec.query();
@@ -131,7 +122,6 @@ fn test_empty_command(){
 
 #[test]
 fn test_negative_coordinates() {
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::new(-10, -10, 'S'));
     exec.execute("MMRML");
     assert_eq!(exec.query().y, -12);
@@ -141,7 +131,6 @@ fn test_negative_coordinates() {
 
 #[test]
 fn test_lowercase_commands() {
-    use executor::{Executor, Pose};
     let mut exec = Executor::with_pose(Pose::default());
     exec.execute("mrm"); 
     let res = exec.query();
