@@ -56,3 +56,20 @@ fn test_turn_right() {
     assert_eq!(res.heading, 'N');
 }
 
+#[test]
+fn test_turn_left() {
+    use executor::{Executor, Pose};
+    let mut exec = Executor::with_pose(Pose::default());
+    exec.execute("L");
+    let res = exec.query();
+    assert_eq!(res.heading, 'W');
+    exec.execute("L");
+    let res = exec.query();
+    assert_eq!(res.heading, 'S');
+    exec.execute("L");
+    let res = exec.query();
+    assert_eq!(res.heading, 'E');
+    exec.execute("L");
+    let res = exec.query();
+    assert_eq!(res.heading, 'N');
+}   
