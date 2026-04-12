@@ -128,3 +128,13 @@ fn test_empty_command(){
     assert_eq!(res.y, 0);
     assert_eq!(res.heading, 'N');
 }
+
+#[test]
+fn test_negative_coordinates() {
+    use executor::{Executor, Pose};
+    let mut exec = Executor::with_pose(Pose::new(-10, -10, 'S'));
+    exec.execute("MMRML");
+    assert_eq!(exec.query().y, -12);
+    assert_eq!(exec.query().x, -11);
+    assert_eq!(exec.query().heading, 'S');
+}
