@@ -40,6 +40,13 @@ impl Executor {
                     'W' => self.pose.x -= 1,              
                     _ => (),
                 },
+                'R' => match self.pose.heading{
+                    'N' => self.pose.heading = 'E',
+                    'E' => self.pose.heading = 'S', 
+                    'S' => self.pose.heading = 'W', 
+                    'W' => self.pose.heading = 'N',              
+                    _ => (),
+                },
                 _ => (),
             }
         }

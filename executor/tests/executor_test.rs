@@ -38,3 +38,21 @@ fn test_move_west() {
     assert!(res.heading == 'W');
 }
 
+#[test]
+fn test_turn_right() {
+    use executor::{Executor, Pose};
+    let mut exec = Executor::with_pose(Pose::default());
+    exec.execute("R");
+    let res = exec.query();
+    assert_eq!(res.heading, 'E');
+    exec.execute("R");
+    let res = exec.query();
+    assert_eq!(res.heading, 'S');
+    exec.execute("R");
+    let res = exec.query();
+    assert_eq!(res.heading, 'W');
+    exec.execute("R");
+    let res = exec.query();
+    assert_eq!(res.heading, 'N');
+}
+
