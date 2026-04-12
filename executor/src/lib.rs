@@ -1,3 +1,3 @@
 mod executor;
 
-pub use crate::executor::{Pose, Executor};
+pub use crate::executor::{Executor, Pose};

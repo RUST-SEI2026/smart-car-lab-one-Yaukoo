@@ -31,27 +31,27 @@ impl Executor {
     }
 
     pub fn execute(&mut self, cmds: &str) {
-        for cmd in cmds.chars(){
-            match cmd{
-                'M' => match self.pose.heading{
+        for cmd in cmds.chars() {
+            match cmd {
+                'M' => match self.pose.heading {
                     'N' => self.pose.y += 1,
-                    'E' => self.pose.x += 1, 
-                    'S' => self.pose.y -= 1, 
-                    'W' => self.pose.x -= 1,              
+                    'E' => self.pose.x += 1,
+                    'S' => self.pose.y -= 1,
+                    'W' => self.pose.x -= 1,
                     _ => (),
                 },
-                'R' => match self.pose.heading{
+                'R' => match self.pose.heading {
                     'N' => self.pose.heading = 'E',
-                    'E' => self.pose.heading = 'S', 
-                    'S' => self.pose.heading = 'W', 
-                    'W' => self.pose.heading = 'N',              
+                    'E' => self.pose.heading = 'S',
+                    'S' => self.pose.heading = 'W',
+                    'W' => self.pose.heading = 'N',
                     _ => (),
                 },
-                'L' => match self.pose.heading{
+                'L' => match self.pose.heading {
                     'N' => self.pose.heading = 'W',
-                    'E' => self.pose.heading = 'N', 
-                    'S' => self.pose.heading = 'E', 
-                    'W' => self.pose.heading = 'S',              
+                    'E' => self.pose.heading = 'N',
+                    'S' => self.pose.heading = 'E',
+                    'W' => self.pose.heading = 'S',
                     _ => (),
                 },
                 _ => (),
