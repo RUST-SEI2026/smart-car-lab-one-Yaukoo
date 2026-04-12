@@ -28,3 +28,13 @@ fn test_move_south() {
     assert!(res.heading == 'S');
 }
 
+#[test]
+fn test_move_west() {
+    use executor::{Executor, Pose};
+    let mut exec = Executor::with_pose(Pose::new(0, 0, 'W'));
+    exec.execute("M");
+    let res = exec.query();
+    assert_eq!(res.x, -1);
+    assert!(res.heading == 'W');
+}
+
