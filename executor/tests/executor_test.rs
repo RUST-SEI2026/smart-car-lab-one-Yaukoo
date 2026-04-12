@@ -106,3 +106,14 @@ fn test_complex_path(){
     assert_eq!(res.y, 1);
     assert_eq!(res.heading, 'E');
 }
+
+#[test]
+fn test_invalid_commands(){
+    use executor::{Executor, Pose};
+    let mut exec = Executor::with_pose(Pose::default());
+    exec.execute("M 1M MX@");
+    let res = exec.query();
+    assert_eq!(res.x, 0);
+    assert_eq!(res.y, 3);
+    assert_eq!(res.heading, 'N');
+}
