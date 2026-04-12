@@ -117,3 +117,14 @@ fn test_invalid_commands(){
     assert_eq!(res.y, 3);
     assert_eq!(res.heading, 'N');
 }
+
+#[test]
+fn test_empty_command(){
+    use executor::{Executor, Pose};
+    let mut exec = Executor::with_pose(Pose::default());
+    exec.execute("");
+    let res = exec.query();
+    assert_eq!(res.x, 0);
+    assert_eq!(res.y, 0);
+    assert_eq!(res.heading, 'N');
+}
