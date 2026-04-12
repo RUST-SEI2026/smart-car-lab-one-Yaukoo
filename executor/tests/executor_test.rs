@@ -73,3 +73,14 @@ fn test_turn_left() {
     let res = exec.query();
     assert_eq!(res.heading, 'N');
 }   
+
+#[test]
+fn test_zigzag_path() {
+    use executor::{Executor, Pose};
+    let mut exec = Executor::with_pose(Pose::default());
+    exec.execute("MRMLM");
+    let res = exec.query();
+    assert_eq!(res.x, 1);
+    assert_eq!(res.y, 2);
+    assert_eq!(res.heading, 'N');
+}
