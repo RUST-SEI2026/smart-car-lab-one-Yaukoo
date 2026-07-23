@@ -138,3 +138,39 @@ fn test_lowercase_commands() {
     assert_eq!(res.y, 0);
     assert_eq!(res.heading, 'N');
 }
+
+#[test]
+fn test_invalid_initial_heading_is_ignored() {
+    let mut exec = Executor::with_pose(Pose::new(3, 4, 'X'));
+    exec.execute("MRLMM");
+    let res = exec.query();
+    assert_eq!(res.x, 3);
+    assert_eq!(res.y, 4);
+    assert_eq!(res.heading, 'X');
+}
+
+#[test]
+fn test_unicode_invalid_commands_are_ignored() {
+    let mut exec = Executor::with_pose(Pose::default());
+    exec.execute("M北M车R");
+    let res = exec.query();
+    assert_eq!(res.x, 0);
+    assert_eq!(res.y, 2);
+    assert_eq!(res.heading, 'E');
+}
+
+#[test]
+fn test_million_level_commands() {
+    let mut cmds = String::with_capacity(1_000_000);
+    for _ in 0..250_000 {
+        cmds.push_str("MRML");
+    }
+
+    let mut exec = Executor::with_pose(Pose::default());
+    exec.execute(&cmds);
+    let res = exec.query();
+
+    assert_eq!(res.x, 250_000);
+    assert_eq!(res.y, 250_000);
+    assert_eq!(res.heading, 'N');
+}

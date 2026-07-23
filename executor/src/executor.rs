@@ -31,32 +31,36 @@ impl Executor {
     }
 
     pub fn execute(&mut self, cmds: &str) {
-        for cmd in cmds.chars() {
+        let mut x = self.pose.x;
+        let mut y = self.pose.y;
+        let mut direction = match self.pose.heading {
+            'N' => 0usize,
+            'E' => 1,
+            'S' => 2,
+            'W' => 3,
+            _ => return,
+        };
+
+        for cmd in cmds.bytes() {
             match cmd {
-                'M' => match self.pose.heading {
-                    'N' => self.pose.y += 1,
-                    'E' => self.pose.x += 1,
-                    'S' => self.pose.y -= 1,
-                    'W' => self.pose.x -= 1,
-                    _ => (),
-                },
-                'R' => match self.pose.heading {
-                    'N' => self.pose.heading = 'E',
-                    'E' => self.pose.heading = 'S',
-                    'S' => self.pose.heading = 'W',
-                    'W' => self.pose.heading = 'N',
-                    _ => (),
-                },
-                'L' => match self.pose.heading {
-                    'N' => self.pose.heading = 'W',
-                    'E' => self.pose.heading = 'N',
-                    'S' => self.pose.heading = 'E',
-                    'W' => self.pose.heading = 'S',
-                    _ => (),
-                },
+                b'M' => {
+                    const STEPS: [(i32, i32); 4] = [(0, 1), (1, 0), (0, -1), (-1, 0)];
+                    let (dx, dy) = STEPS[direction];
+                    x += dx;
+                    y += dy;
+                }
+                b'R' => direction = (direction + 1) & 3,
+                b'L' => direction = (direction + 3) & 3,
                 _ => (),
             }
         }
+
+        const HEADINGS: [char; 4] = ['N', 'E', 'S', 'W'];
+        self.pose = Pose {
+            x,
+            y,
+            heading: HEADINGS[direction],
+        };
     }
 
     pub fn query(&self) -> Pose {
